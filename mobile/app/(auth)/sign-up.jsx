@@ -9,7 +9,6 @@ import { COLORS } from '../../constants/colors';
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
-
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [pendingVerification, setPendingVerification] = useState(false);
@@ -71,6 +70,15 @@ export default function SignUpScreen() {
     return (
       <View style={styles.verificationContainer}>
         <Text style={styles.verificationTitle}>Verify your email</Text>
+        {error ? (
+          <View style={styles.errorBox}>
+            <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity onPress={() => setError('')}>
+              <Ionicons name="close" size={20} color={COLORS.textLight} />
+            </TouchableOpacity>
+          </View>
+        ) : null}
         <TextInput
           style={[styles.verificationInput, error && styles.errorInput]}
           value={code}

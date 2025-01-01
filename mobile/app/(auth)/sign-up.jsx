@@ -1,4 +1,5 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image } from 'expo-image';
 import { useSignUp } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -66,7 +67,7 @@ export default function SignUpScreen() {
     }
   };
 
-  if (true) {
+  if (pendingVerification) {
     return (
       <View style={styles.verificationContainer}>
         <Text style={styles.verificationTitle}>Verify your email</Text>
@@ -94,31 +95,32 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View>
-      <>
-        <Text>Sign up</Text>
-        <TextInput
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          onChangeText={email => setEmailAddress(email)}
-        />
-        <TextInput
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry={true}
-          onChangeText={password => setPassword(password)}
-        />
-        <TouchableOpacity onPress={onSignUpPress}>
-          <Text>Continue</Text>
+    <View style={styles.container}>
+      <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
+      <Text style={styles.title}>Create Account</Text>
+      <TextInput
+        style={[styles.input, error && styles.errorInput]}
+        autoCapitalize="none"
+        value={emailAddress}
+        placeholder="Enter email"
+        onChangeText={email => setEmailAddress(email)}
+      />
+      <TextInput
+        style={[styles.input, error && styles.errorInput]}
+        value={password}
+        placeholder="Enter password"
+        secureTextEntry={true}
+        onChangeText={password => setPassword(password)}
+      />
+      <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+        <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+      <View style={styles.footerContainer}>
+        <Text style={styles.footerText}>Already have an account?</Text>
+        <TouchableOpacity onPress={() => router.back()}>
+          <Text style={styles.linkText}>Sign in</Text>
         </TouchableOpacity>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-          <Text>Already have an account?</Text>
-          <Link href="/sign-in">
-            <Text>Sign in</Text>
-          </Link>
-        </View>
-      </>
+      </View>
     </View>
   );
 }

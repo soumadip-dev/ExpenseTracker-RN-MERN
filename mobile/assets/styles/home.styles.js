@@ -1,10 +1,197 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../constants/colors';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+  content: {
+    padding: 20,
+    paddingBottom: 0,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 0,
+    paddingVertical: 12,
+  },
+  headerLeft: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerLogo: {
+    width: 75,
+    height: 75,
+  },
+  welcomeContainer: {
+    flex: 1,
+  },
+  welcomeText: {
+    fontSize: 14,
+    color: COLORS.textLight,
+    marginBottom: 2,
+  },
+  usernameText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.text,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: COLORS.text,
+  },
+  addButton: {
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  addButtonText: {
+    color: COLORS.white,
+    fontWeight: '600',
+    marginLeft: 4,
+  },
+  logoutButton: {
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: COLORS.card,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  balanceCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  balanceTitle: {
+    fontSize: 16,
+    color: COLORS.textLight,
+    marginBottom: 8,
+  },
+  balanceAmount: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: COLORS.text,
+    marginBottom: 20,
+  },
+  balanceStats: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  balanceStatItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statDivider: {
+    borderRightWidth: 1,
+    borderColor: COLORS.border,
+  },
+  balanceStatLabel: {
+    fontSize: 14,
+    color: COLORS.textLight,
+    marginBottom: 4,
+  },
+  balanceStatAmount: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginBottom: 15,
+  },
+  transactionCard: {
+    backgroundColor: COLORS.card,
+    borderRadius: 12,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  transactionContent: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 15,
+    alignItems: 'center',
+  },
+  categoryIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  transactionLeft: {
+    flex: 1,
+  },
+  transactionTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: 4,
+  },
+  transactionCategory: {
+    fontSize: 14,
+    color: COLORS.textLight,
+  },
+  transactionRight: {
+    alignItems: 'flex-end',
+  },
+  transactionAmount: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  transactionDate: {
+    fontSize: 12,
+    color: COLORS.textLight,
+  },
+  deleteButton: {
+    padding: 15,
+    borderLeftWidth: 1,
+    borderLeftColor: COLORS.border,
+  },
+  transactionsContainer: {
+    marginBottom: 20,
   },
   loadingContainer: {
     flex: 1,
@@ -12,116 +199,65 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.background,
   },
-  listContainer: {
-    padding: 16,
-    paddingBottom: 80,
-  },
-  header: {
-    marginBottom: 20,
+  emptyState: {
+    backgroundColor: COLORS.card,
+    borderRadius: 16,
+    padding: 30,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    shadowColor: COLORS.shadow,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
-  headerTitle: {
-    fontSize: 24,
-    fontFamily: 'JetBrainsMono-Medium',
-    letterSpacing: 0.5,
-    color: COLORS.primary,
+  emptyStateIcon: {
+    marginBottom: 16,
+  },
+  emptyStateTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
     marginBottom: 8,
   },
-  headerSubtitle: {
+  emptyStateText: {
+    color: COLORS.textLight,
     fontSize: 14,
-    color: COLORS.textSecondary,
     textAlign: 'center',
-  },
-  bookCard: {
-    backgroundColor: COLORS.cardBackground,
-    borderRadius: 16,
     marginBottom: 20,
-    padding: 16,
-    shadowColor: COLORS.black,
+    lineHeight: 20,
+  },
+  emptyStateButton: {
+    backgroundColor: COLORS.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+    shadowRadius: 3,
+    elevation: 2,
   },
-  bookHeader: {
+  emptyStateButtonText: {
+    color: COLORS.white,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
+  transactionsHeaderContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 10,
+    paddingBottom: 5,
   },
-  userInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  transactionsList: {
+    flex: 1,
+    marginHorizontal: 20,
   },
-  avatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    marginRight: 10,
-  },
-  username: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: COLORS.textPrimary,
-  },
-  bookImageContainer: {
-    width: '100%',
-    height: 200,
-    borderRadius: 12,
-    overflow: 'hidden',
-    marginBottom: 12,
-    backgroundColor: COLORS.border,
-  },
-  bookImage: {
-    width: '100%',
-    height: '100%',
-  },
-  bookDetails: {
-    padding: 4,
-  },
-  bookTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: COLORS.textPrimary,
-    marginBottom: 6,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    marginBottom: 8,
-  },
-  caption: {
-    fontSize: 14,
-    color: COLORS.textDark,
-    marginBottom: 8,
-    lineHeight: 20,
-  },
-  date: {
-    fontSize: 12,
-    color: COLORS.textSecondary,
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 40,
-    marginTop: 40,
-  },
-  emptyText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: COLORS.textPrimary,
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  emptySubtext: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    textAlign: 'center',
-  },
-  footerLoader: {
-    marginVertical: 20,
+  transactionsListContent: {
+    paddingBottom: 20,
   },
 });
-
-export default styles;

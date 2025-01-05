@@ -4,7 +4,7 @@ import SafeScreen from '../components/SafeScreen';
 export default function RootLayout() {
   return (
     <SafeScreen>
-      <Stack />;
+      <Stack />
     </SafeScreen>
   );
 }

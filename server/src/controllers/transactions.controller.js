@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Transaction from '../model/transactions.model.js';
 import {
   createTransactionService,
   getTransactionsByUserIdService,

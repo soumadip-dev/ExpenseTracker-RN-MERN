@@ -63,7 +63,7 @@ const getSummaryByUserIdService = async userId => {
           $sum: {
             $cond: [
               { $lt: ['$amount', 0] }, // IF amount < 0
-              { $abs: '$amount' }, // THEN add the absolute value
+              '$amount',
               0, // ELSE add 0
             ],
           },

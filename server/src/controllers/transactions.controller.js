@@ -38,7 +38,7 @@ const getTransactionsByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    // Validate input
+    // Check if userId is present
     if (!userId) {
       return res.status(400).json({ message: 'userId is missing', success: false });
     }
@@ -101,7 +101,9 @@ const getSummaryByUserId = async (req, res) => {
       return res.status(400).json({ message: 'userId is missing', success: false });
     }
 
+    // Call service
     const summary = await getSummaryByUserIdService(userId);
+
     // Send response (success)
     res.status(200).json({
       message: 'Summary fetched successfully',

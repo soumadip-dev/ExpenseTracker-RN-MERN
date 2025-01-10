@@ -8,6 +8,7 @@ import {
 
 const router = Router();
 
+// Routes
 router.post('/', createTransaction);
 router.get('/:userId', getTransactionsByUserId);
 router.delete('/:transactionId', deleteTransaction);

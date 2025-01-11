@@ -1,4 +1,3 @@
-import sql from '../config/db.config.js';
 import {
   createTransactionService,
   getTransactionsByUserIdService,

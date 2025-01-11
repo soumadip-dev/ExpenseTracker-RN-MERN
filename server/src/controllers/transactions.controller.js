@@ -4,6 +4,7 @@ import {
   createTransactionService,
   getTransactionsByUserIdService,
   deleteTransactionService,
+  getSummaryByUserIdService,
 } from '../services/transaction.service.js';
 
 //* Controller to create a transaction
@@ -100,44 +101,7 @@ const getSummaryByUserId = async (req, res) => {
       return res.status(400).json({ message: 'userId is missing', success: false });
     }
 
-    // Aggregate transactions to get summary
-    const summary = await Transaction.aggregate([
-      // Filter by user
-      { $match: { user_id: userId } },
-
-      // Group all matching docs together and calculate fields
-      {
-        $group: {
-          _id: null, // Group all documents together into one result
-
-          // total balance = just sum of all amounts
-          totalBalance: { $sum: '$amount' },
-
-          // total income = sum only positive numbers
-          totalIncome: {
-            $sum: {
-              $cond: [
-                { $gt: ['$amount', 0] }, // IF amount > 0
-                '$amount', // THEN add the amount
-                0, // ELSE add 0
-              ],
-            },
-          },
-
-          // total expenses = sum only negative numbers
-          totalExpenses: {
-            $sum: {
-              $cond: [
-                { $lt: ['$amount', 0] }, // IF amount < 0
-                { $abs: '$amount' }, // THEN add the absolute value
-                0, // ELSE add 0
-              ],
-            },
-          },
-        },
-      },
-    ]);
-
+    const summary = await getSummaryByUserIdService(userId);
     // Send response (success)
     res.status(200).json({
       message: 'Summary fetched successfully',

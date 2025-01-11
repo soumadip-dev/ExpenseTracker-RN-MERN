@@ -26,7 +26,7 @@ const createTransaction = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error creating transaction', error.message);
     // Send response(error)
     res.status(500).json({ message: 'Internal server error', success: false });
   }
@@ -52,7 +52,7 @@ const getTransactionsByUserId = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.error('Error getting transactions', error);
+    console.error('Error getting transactions', error.message);
     // Send response (error)
     res.status(500).json({ message: 'Internal server error', success: false });
   }
@@ -84,9 +84,10 @@ const deleteTransaction = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.error('Error getting transactions', error.message);
+    console.error('Error deleting transaction', error.message);
     // Send response (error)
     res.status(500).json({ message: 'Internal server error', success: false });
   }
 };
+
 export { createTransaction, getTransactionsByUserId, deleteTransaction };

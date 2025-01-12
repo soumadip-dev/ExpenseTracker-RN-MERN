@@ -11,4 +11,15 @@ const createTransactionService = async ({ user_id, title, amount, category }) =>
   return transaction[0];
 };
 
-export { createTransactionService };
+//* Service to get all transactions created by userId
+const getTransactionsByUserIdService = async userId => {
+  const transactions = await sql`
+    SELECT *
+    FROM transactions
+    WHERE user_id = ${userId}
+    ORDER BY created_at DESC;
+  `;
+  return transactions;
+};
+
+export { createTransactionService, getTransactionsByUserIdService };

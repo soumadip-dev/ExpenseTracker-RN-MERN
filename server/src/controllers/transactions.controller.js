@@ -1,5 +1,6 @@
 import { createTransactionService } from '../services/transaction.service.js';
 
+//* Controller to create a transaction
 const createTransaction = async (req, res) => {
   try {
     const { user_id, title, amount, category } = req.body;
@@ -12,6 +13,7 @@ const createTransaction = async (req, res) => {
     // Call service
     const transaction = await createTransactionService({ user_id, title, amount, category });
 
+    // Send response(success)
     res.status(201).json({
       message: 'Transaction created successfully',
       data: transaction,
@@ -19,6 +21,7 @@ const createTransaction = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    // Send response(error)
     res.status(500).json({ message: 'Internal server error', success: false });
   }
 };

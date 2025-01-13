@@ -1,5 +1,6 @@
 import sql from '../config/db.config.js';
 
+//* Service to create a transaction
 const createTransactionService = async ({ user_id, title, amount, category }) => {
   // Insert transaction into DB
   const transaction = await sql`

@@ -21,6 +21,13 @@ export default function Page() {
     loadData();
   }, [user?.id, loadData]);
 
+  const handleDelete = id => {
+    Alert.alert('Delete Transaction', 'Are you sure you want to delete this transaction?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Delete', style: 'destructive', onPress: () => deleteTransaction(id) },
+    ]);
+  };
+
   if (isLoading) return <PageLoader />;
 
   console.log('transaction', transaction);
@@ -66,7 +73,7 @@ export default function Page() {
         style={styles.transactionsList}
         contentContainerStyle={styles.transactionsListContent}
         data={transaction}
-        renderItem={({ item }) => <TransactionItem item={item} onDelete={deleteTransaction} />}
+        renderItem={({ item }) => <TransactionItem item={item} onDelete={handleDelete} />}
         ListEmptyComponent={<NoTransactionsFound />}
         showsVerticalScrollIndicator={false}
       />

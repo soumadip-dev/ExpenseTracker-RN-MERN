@@ -60,6 +60,8 @@ export default function Page() {
           <Text style={styles.sectionTitle}>Recent Transactions</Text>
         </View>
       </View>
+      {/* FlatList is a performant way to render long lists in React Native. */}
+      {/* it renders items lazily — only those on the screen. */}
       <FlatList
         style={styles.transactionsList}
         contentContainerStyle={styles.transactionsListContent}

@@ -4,7 +4,7 @@ import { API_URL } from '../constants/api.js';
 
 //* Custom hook to fetch transactions and account summary and delete a transaction
 export const useTransactions = userId => {
-  const [transaction, setTransaction] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState({
     balance: 0,
     income: 0,
@@ -19,7 +19,7 @@ export const useTransactions = userId => {
     try {
       const response = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await response.json();
-      setTransaction(data.data);
+      setTransactions(data.data);
     } catch (error) {
       console.error('Error fetching transactions', error);
     }
@@ -68,7 +68,7 @@ export const useTransactions = userId => {
   };
 
   return {
-    transaction,
+    transactions,
     summary,
     isLoading,
     loadData,

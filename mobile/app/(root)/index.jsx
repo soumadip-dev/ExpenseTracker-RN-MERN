@@ -12,24 +12,33 @@ import { TransactionItem } from '../../components/TransactionItem.jsx';
 import NoTransactionsFound from '../../components/NoTransactionsFound.jsx';
 
 export default function Page() {
+  // Get the user from Clerk
   const { user } = useUser();
+
+  // Get the router from Expo
   const router = useRouter();
+
+  // Set the refreshing state
   const [refreshing, setRefreshing] = useState(false);
 
+  // Custom hook to fetch transactions and account summary
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(
     user?.id
   );
 
+  // Function to handle refresh
   const onRefresh = async () => {
     setRefreshing(true);
     await loadData();
     setRefreshing(false);
   };
 
+  // Run the loadData function when the user id changes
   useEffect(() => {
     loadData();
   }, [user?.id, loadData]);
 
+  // Function to handle delete
   const handleDelete = id => {
     Alert.alert('Delete Transaction', 'Are you sure you want to delete this transaction?', [
       { text: 'Cancel', style: 'cancel' },
@@ -37,7 +46,8 @@ export default function Page() {
     ]);
   };
 
-  if (isLoading) return <PageLoader />;
+  // If loading and not refreshing, show the loader
+  if (isLoading && !refreshing) return <PageLoader />;
 
   return (
     <View style={styles.container}>

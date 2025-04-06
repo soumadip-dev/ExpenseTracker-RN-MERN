@@ -38,7 +38,7 @@ export const TransactionItem = ({ item, onDelete }) => {
           <Text style={styles.transactionDate}>{formatDate(item.created_at)}</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.deleteButton} onPress={() => onDelete(item.id)}>
+      <TouchableOpacity style={styles.deleteButton} onPress={() => onDelete(item._id)}>
         <Ionicons name="trash-outline" size={20} color={COLORS.expense} />
       </TouchableOpacity>
     </View>

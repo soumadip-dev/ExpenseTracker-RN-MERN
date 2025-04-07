@@ -13,10 +13,14 @@
 </p>
 
 <div align="center">
-  <img src="https://github.com/burakorkmez/wallet-app-expo/blob/master/mobile/assets/images/screenshot-for-readme.png" alt="Expense Tracker screenshot" width="900">
+
+| Authentication Pages                                                                   | Transaction Pages                                                                                      |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| <img src="./mobile/assets/images/SS_Auth_pages.jpg" alt="Auth Screenshot" width="400"> | <img src="./mobile/assets/images/SS_Transactions_pages.jpg" alt="Transactions Screenshot" width="400"> |
+
 </div>
 
-## ⭐ Features
+## ✨ Features
 
 - **User Authentication**: Signup and login using Clerk authentication.
 - **Email Verification**: Secure 6-digit verification code before accessing the app.
@@ -27,7 +31,7 @@
 - **Pull-to-Refresh**: Classic refresh gesture implemented from scratch.
 - **Logout**: Easily switch accounts or sign out.
 - **Rate Limiting**: Redis-based protection for API endpoints.
-- **Backend**: Express RESTful API connected to Neon-hosted Postgres.
+- **Backend**: Express RESTful API connected to MongoDB.
 - **Cloud Deployment**: Fully hosted backend for mobile access.
 - **Beginner Friendly**: No prior React Native experience required.
 - **Free Tools**: 100% free stack for development and testing.
@@ -71,8 +75,8 @@
    ```env
    PORT=8080
    MONGO_URI=<your_mongodb_uri>
-   UPSTASH_REDIS_REST_URL=<YOUR_UPSTASH_REDIS_REST_URL>
-   UPSTASH_REDIS_REST_TOKEN=<YOUR_UPSTASH_REDIS_REST_TOKEN>
+   UPSTASH_REDIS_REST_URL=<your_upstash_redis_rest_url>
+   UPSTASH_REDIS_REST_TOKEN=<your_upstash_redis_rest_token>
    ```
 
 3. **Frontend Setup**
@@ -85,20 +89,17 @@
    Create a `.env` file in the `mobile` directory with:
 
    ```env
-   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=<YOUR_PUBLISHABLE_KEY>
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=<your_clerk_publishable_key>
    ```
 
 4. **Run the Application**
 
    - Backend (Terminal 1):
-
      ```bash
      cd server
      npm run dev
      ```
-
    - Frontend (Terminal 2):
-
      ```bash
      cd ../mobile
      npm start

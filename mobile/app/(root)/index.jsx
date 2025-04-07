@@ -1,6 +1,6 @@
 import { useUser } from '@clerk/clerk-expo';
-import { router } from 'expo-router';
-import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { Alert, FlatList, Image, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { SignOutButton } from '@/components/SignOutButton';
 import { useTransactions } from '../../hooks/useTransactions.js';
 import { useEffect } from 'react';
@@ -13,6 +13,7 @@ import NoTransactionsFound from '../../components/NoTransactionsFound.jsx';
 
 export default function Page() {
   const { user } = useUser();
+  const router = useRouter();
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(
     user?.id
   );
@@ -72,6 +73,7 @@ export default function Page() {
         renderItem={({ item }) => <TransactionItem item={item} onDelete={handleDelete} />}
         ListEmptyComponent={<NoTransactionsFound />}
         showsVerticalScrollIndicator={false}
+        // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </View>
   );

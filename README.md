@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  Expense Tracker App (RN-MERN)
+  💰 Expense Tracker App (RN-MERN) 💸
   <br>
 </h1>
 
@@ -9,7 +9,7 @@
 </div>
 
 <p align="center">
-  A cross-platform expense tracker app built with React Native (Expo) and Node.js. Track income & expenses, manage transactions, and monitor balance in real time.
+  A cross-platform expense tracker app built with React Native (Expo) and Node.js. Track income & expenses in real time!
 </p>
 
 <div align="center">
@@ -22,19 +22,19 @@
 
 ## ✨ Features
 
-- **User Authentication**: Signup and login using Clerk authentication.
-- **Email Verification**: Secure 6-digit verification code before accessing the app.
-- **5 Screens**: Signup, Login, Verify Email, Home, and Create Transaction.
-- **Expense Tracker**: Add income or expenses and manage financial entries.
-- **Live Balance Updates**: Current balance calculated dynamically.
-- **Delete Transactions**: Remove old entries with a single tap.
-- **Pull-to-Refresh**: Classic refresh gesture implemented from scratch.
-- **Logout**: Easily switch accounts or sign out.
-- **Rate Limiting**: Redis-based protection for API endpoints.
-- **Backend**: Express RESTful API connected to MongoDB.
-- **Cloud Deployment**: Fully hosted backend for mobile access.
-- **Beginner Friendly**: No prior React Native experience required.
-- **Free Tools**: 100% free stack for development and testing.
+- 🔐 **User Authentication**: Signup and login using Clerk authentication
+- 📧 **Email Verification**: Secure 6-digit verification code before accessing the app
+- 📱 **5 Screens**: Signup, Login, Verify Email, Home, and Create Transaction
+- 💰 **Expense Tracker**: Add income or expenses and manage financial entries
+- ⚡ **Live Balance Updates**: Current balance calculated dynamically
+- 🗑️ **Delete Transactions**: Remove old entries with a single tap
+- 🔄 **Pull-to-Refresh**: Classic refresh gesture implemented from scratch
+- 👋 **Logout**: Easily switch accounts or sign out
+- 🛡️ **Rate Limiting**: Redis-based protection for API endpoints
+- 🚀 **Backend**: Express RESTful API connected to MongoDB
+- ☁️ **Cloud Deployment**: Fully hosted backend for mobile access
+- 🎯 **Beginner Friendly**: No prior React Native experience required
+- 💯 **Free Tools**: 100% free stack for development and testing
 
 ## 🛠️ Tech Stack
 
@@ -45,7 +45,7 @@
 - **Authentication**: Clerk
 - **Cloud Deployment**: Backend hosted online, accessible by mobile
 
-## 🛠️ Installation & Setup
+## ⚙️ Installation & Setup
 
 ### Prerequisites
 

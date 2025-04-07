@@ -16,8 +16,6 @@
   <img src="https://github.com/burakorkmez/wallet-app-expo/blob/master/mobile/assets/images/screenshot-for-readme.png" alt="Expense Tracker screenshot" width="900">
 </div>
 
-<p align="center">🚧 Currently Building 🚧</p>
-
 ## ⭐ Features
 
 - **User Authentication**: Signup and login using Clerk authentication.
@@ -43,7 +41,6 @@
 - **Authentication**: Clerk
 - **Cloud Deployment**: Backend hosted online, accessible by mobile
 
-<!--
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
@@ -51,8 +48,8 @@
 - Node.js (v18 or higher)
 - npm or yarn
 - Expo CLI (`npm install -g expo-cli`)
-- Neon PostgreSQL database
-- Redis server
+- MongoDB database (e.g., MongoDB Atlas)
+- Redis server (e.g., Upstash Redis)
 
 ### Setup
 
@@ -61,7 +58,7 @@
    ```bash
    git clone https://github.com/soumadip-dev/ExpenseTracker-RN-PERN.git
    cd ExpenseTracker-RN-PERN
-````
+   ```
 
 2. **Backend Setup**
 
@@ -74,24 +71,22 @@
 
    ```env
    PORT=8080
-   DATABASE_URL=<YOUR_NEON_POSTGRES_URL>
-   REDIS_URL=<YOUR_REDIS_URL>
-   JWT_SECRET=<YOUR_SECRET_KEY>
-   NODE_ENV=development
+   MONGO_URI=<your_mongodb_uri>
+   UPSTASH_REDIS_REST_URL=<YOUR_UPSTASH_REDIS_REST_URL>
+   UPSTASH_REDIS_REST_TOKEN=<YOUR_UPSTASH_REDIS_REST_TOKEN>
    ```
 
 3. **Frontend Setup**
 
    ```bash
-   cd ../client
+   cd ../mobile
    npm install
    ```
 
-   Create a `.env` file in the `client` directory with:
+   Create a `.env` file in the `mobile` directory with:
 
    ```env
-   VITE_BACKEND_URL=<YOUR_BACKEND_URL>
-   CLERK_PUBLISHABLE_KEY=<YOUR_CLERK_PUBLISHABLE_KEY>
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=<YOUR_PUBLISHABLE_KEY>
    ```
 
 4. **Run the Application**
@@ -106,7 +101,6 @@
    - Frontend (Terminal 2):
 
      ```bash
-     cd ../client
-     expo start
+     cd ../mobile
+     npm start
      ```
--->

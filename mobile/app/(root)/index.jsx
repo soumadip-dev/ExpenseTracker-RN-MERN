@@ -13,7 +13,7 @@ import NoTransactionsFound from '../../components/NoTransactionsFound.jsx';
 
 export default function Page() {
   const { user } = useUser();
-  const { transaction, summary, isLoading, loadData, deleteTransaction } = useTransactions(
+  const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(
     user?.id
   );
 
@@ -29,10 +29,6 @@ export default function Page() {
   };
 
   if (isLoading) return <PageLoader />;
-
-  console.log('transaction', transaction);
-  console.log('summary', summary);
-  console.log('User ID', user?.id);
 
   return (
     <View style={styles.container}>
@@ -72,7 +68,7 @@ export default function Page() {
       <FlatList
         style={styles.transactionsList}
         contentContainerStyle={styles.transactionsListContent}
-        data={transaction}
+        data={transactions}
         renderItem={({ item }) => <TransactionItem item={item} onDelete={handleDelete} />}
         ListEmptyComponent={<NoTransactionsFound />}
         showsVerticalScrollIndicator={false}

@@ -35,7 +35,7 @@ export const TransactionItem = ({ item, onDelete }) => {
           >
             {isIncome ? '+' : '-'}₹{Math.abs(parseFloat(item.amount)).toFixed(2)}
           </Text>
-          <Text style={styles.transactionDate}>{formatDate(item.created_at)}</Text>
+          <Text style={styles.transactionDate}>{formatDate(item.createdAt)}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.deleteButton} onPress={() => onDelete(item._id)}>

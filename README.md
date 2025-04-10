@@ -47,7 +47,6 @@
 
 - Node.js (v18 or higher)
 - npm or yarn
-- Expo CLI (`npm install -g expo-cli`)
 - MongoDB database (e.g., MongoDB Atlas)
 - Redis server (e.g., Upstash Redis)
 

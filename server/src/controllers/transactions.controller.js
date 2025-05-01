@@ -1,8 +1,7 @@
-import sql from '../config/db.config.js';
+import { createTransactionService } from '../services/transaction.service.js';
 
 const createTransaction = async (req, res) => {
   try {
-    // Get required fields fromm request body
     const { user_id, title, amount, category } = req.body;
 
     // Check if required fields are present
@@ -10,23 +9,16 @@ const createTransaction = async (req, res) => {
       return res.status(400).json({ message: 'Missing required fields', success: false });
     }
 
-    // Insert transaction into DB
-    const transcation = await sql`
-      INSERT INTO transactions (user_id, title, amount, category)
-      VALUES (${user_id}, ${title}, ${amount}, ${category})`;
+    // Call service
+    const transaction = await createTransactionService({ user_id, title, amount, category });
 
-    // Log transaction
-    console.log(transcation);
-
-    // Send success response
-    res
-      .status(201)
-      .json({ message: 'Transaction created successfully', data: transcation[0], success: true });
+    res.status(201).json({
+      message: 'Transaction created successfully',
+      data: transaction,
+      success: true,
+    });
   } catch (error) {
-    // Log error
     console.error(error);
-
-    // Send error response
     res.status(500).json({ message: 'Internal server error', success: false });
   }
 };

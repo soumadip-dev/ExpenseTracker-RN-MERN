@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://github.com/soumadip-dev">
-    <img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss,nodejs,express,postgres,redis,github" alt="Tech Stack" width="350" style="padding: 15px 0;">
+    <img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss,nodejs,express,mongodb,redis,github" alt="Tech Stack" width="350" style="padding: 15px 0;">
   </a>
 </div>
 

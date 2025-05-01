@@ -7,7 +7,7 @@ const createTransaction = async (req, res) => {
 
     // Check if required fields are present
     if (!user_id || !title || !amount || !category) {
-      return res.status(400).json({ error: 'Missing required fields' });
+      return res.status(400).json({ message: 'Missing required fields', success: false });
     }
 
     // Insert transaction into DB

@@ -1,18 +1,22 @@
-<h1 align="center">Expense Tracker App (RN-MERN)</h1>
+<h1 align="center">
+  <br>
+  Expense Tracker App (RN-MERN)
+  <br>
+</h1>
 
 <div align="center">
-  <a href="https://github.com/soumadip-dev">
-    <img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss,nodejs,express,mongodb,redis,github" alt="Tech Stack" width="350" style="padding: 15px 0;">
-  </a>
+  <img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss,nodejs,express,mongodb,redis,github" alt="Tech Stack" width="360">
 </div>
 
-<h3 align="center">
+<p align="center">
   A cross-platform expense tracker app built with React Native (Expo) and Node.js. Track income & expenses, manage transactions, and monitor balance in real time.
-</h3>
+</p>
 
-<p align="center"><strong>🚀 Server implementation complete - Mobile app coming soon!</strong></p>
+<div align="center">
+  <img src="https://github.com/burakorkmez/wallet-app-expo/blob/master/mobile/assets/images/screenshot-for-readme.png" alt="Expense Tracker screenshot" width="900">
+</div>
 
----
+<p align="center">🚧 Currently Building 🚧</p>
 
 ## ⭐ Features
 
@@ -30,8 +34,6 @@
 - **Beginner Friendly**: No prior React Native experience required.
 - **Free Tools**: 100% free stack for development and testing.
 
----
-
 ## 🛠️ Tech Stack
 
 - **Frontend**: React Native, Expo, TypeScript, Tailwind CSS
@@ -40,8 +42,6 @@
 - **Caching & Rate Limiting**: Redis
 - **Authentication**: Clerk
 - **Cloud Deployment**: Backend hosted online, accessible by mobile
-
----
 
 <!--
 ## 🛠️ Installation & Setup

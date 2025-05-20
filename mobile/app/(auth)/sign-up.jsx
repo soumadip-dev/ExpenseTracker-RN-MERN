@@ -1,7 +1,7 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useSignUp } from '@clerk/clerk-expo';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { styles } from '@/assets/styles/auth.styles.js';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ export default function SignUpScreen() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
 
-  // Handle submission of sign-up form
+  //* Handle submission of sign-up form
   const onSignUpPress = async () => {
     if (!isLoaded) return;
 
@@ -34,13 +34,11 @@ export default function SignUpScreen() {
       // and capture OTP code
       setPendingVerification(true);
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
-  // Handle submission of verification form
+  //* Handle submission of verification form
   const onVerifyPress = async () => {
     if (!isLoaded) return;
 
@@ -61,12 +59,11 @@ export default function SignUpScreen() {
         console.error(JSON.stringify(signUpAttempt, null, 2));
       }
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
+  //* Verification form
   if (pendingVerification) {
     return (
       <View style={styles.verificationContainer}>
@@ -94,6 +91,7 @@ export default function SignUpScreen() {
     );
   }
 
+  //* Sign-up form
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <View style={styles.container}>
@@ -112,13 +110,16 @@ export default function SignUpScreen() {
           style={[styles.input, error && styles.errorInput]}
           autoCapitalize="none"
           value={emailAddress}
+          placeholderTextColor="#9A8478"
           placeholder="Enter email"
           onChangeText={email => setEmailAddress(email)}
         />
+
         <TextInput
           style={[styles.input, error && styles.errorInput]}
           value={password}
           placeholder="Enter password"
+          placeholderTextColor="#9A8478"
           secureTextEntry={true}
           onChangeText={password => setPassword(password)}
         />

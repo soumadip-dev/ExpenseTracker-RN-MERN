@@ -13,6 +13,7 @@ export default function Page() {
 
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   //* Handle the submission of the sign-in form
   const onSignInPress = async () => {
@@ -51,6 +52,17 @@ export default function Page() {
     >
       <View style={styles.container}>
         <Text style={styles.title}>Welcome Back</Text>
+
+        {error ? (
+          <View style={styles.errorBox}>
+            <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity onPress={() => setError('')}>
+              <Ionicons name="close" size={20} color={COLORS.textLight} />
+            </TouchableOpacity>
+          </View>
+        ) : null}
+
         <TextInput
           style={[styles.input, error && styles.errorInput]}
           autoCapitalize="none"

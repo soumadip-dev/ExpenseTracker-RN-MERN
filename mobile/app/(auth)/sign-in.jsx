@@ -2,6 +2,10 @@ import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { styles } from '../../assets/styles/auth.styles';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS } from '../../constants/colors';
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -10,7 +14,7 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  // Handle the submission of the sign-in form
+  //* Handle the submission of the sign-in form
   const onSignInPress = async () => {
     if (!isLoaded) return;
 
@@ -32,35 +36,42 @@ export default function Page() {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
 
+  //* Render the sign-in form
   return (
-    <View>
-      <Text>Sign in</Text>
-      <TextInput
-        autoCapitalize="none"
-        value={emailAddress}
-        placeholder="Enter email"
-        onChangeText={emailAddress => setEmailAddress(emailAddress)}
-      />
-      <TextInput
-        value={password}
-        placeholder="Enter password"
-        secureTextEntry={true}
-        onChangeText={password => setPassword(password)}
-      />
-      <TouchableOpacity onPress={onSignInPress}>
-        <Text>Continue</Text>
-      </TouchableOpacity>
-      <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-        <Link href="/sign-up">
-          <Text>Sign up</Text>
-        </Link>
+    <KeyboardAwareScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      enableAutomaticScroll={true}
+      extraScrollHeight={30}
+    >
+      <View>
+        <Text>Sign in</Text>
+        <TextInput
+          autoCapitalize="none"
+          value={emailAddress}
+          placeholder="Enter email"
+          onChangeText={emailAddress => setEmailAddress(emailAddress)}
+        />
+        <TextInput
+          value={password}
+          placeholder="Enter password"
+          secureTextEntry={true}
+          onChangeText={password => setPassword(password)}
+        />
+        <TouchableOpacity onPress={onSignInPress}>
+          <Text>Continue</Text>
+        </TouchableOpacity>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+          <Link href="/sign-up">
+            <Text>Sign up</Text>
+          </Link>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

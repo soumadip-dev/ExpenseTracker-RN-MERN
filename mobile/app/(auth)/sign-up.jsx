@@ -95,31 +95,42 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
-      <Text style={styles.title}>Create Account</Text>
-      <TextInput
-        style={[styles.input, error && styles.errorInput]}
-        autoCapitalize="none"
-        value={emailAddress}
-        placeholder="Enter email"
-        onChangeText={email => setEmailAddress(email)}
-      />
-      <TextInput
-        style={[styles.input, error && styles.errorInput]}
-        value={password}
-        placeholder="Enter password"
-        secureTextEntry={true}
-        onChangeText={password => setPassword(password)}
-      />
-      <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
-      <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.linkText}>Sign in</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.container}>
+        <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
+        <Text style={styles.title}>Create Account</Text>
+        {error ? (
+          <View style={styles.errorBox}>
+            <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity onPress={() => setError('')}>
+              <Ionicons name="close" size={20} color={COLORS.textLight} />
+            </TouchableOpacity>
+          </View>
+        ) : null}
+        <TextInput
+          style={[styles.input, error && styles.errorInput]}
+          autoCapitalize="none"
+          value={emailAddress}
+          placeholder="Enter email"
+          onChangeText={email => setEmailAddress(email)}
+        />
+        <TextInput
+          style={[styles.input, error && styles.errorInput]}
+          value={password}
+          placeholder="Enter password"
+          secureTextEntry={true}
+          onChangeText={password => setPassword(password)}
+        />
+        <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+          <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => router.back()}>
+            <Text style={styles.linkText}>Sign in</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

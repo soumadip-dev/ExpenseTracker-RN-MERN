@@ -37,7 +37,11 @@ export default function Page() {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+      if (err.errors?.[0]?.code === 'form_password_incorrect') {
+        setError('Password is incorrect. Please try again.');
+      } else {
+        setError('An error occurred. Please try again.');
+      }
     }
   };
 
@@ -51,7 +55,7 @@ export default function Page() {
       extraScrollHeight={30}
     >
       <View style={styles.container}>
-        <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
+        <Image source={require('../../assets/images/revenue_01.png')} style={styles.illustration} />
         <Text style={styles.title}>Welcome Back</Text>
 
         {error ? (

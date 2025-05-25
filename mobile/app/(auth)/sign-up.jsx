@@ -1,4 +1,4 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import { Image } from 'expo-image';
 import { useSignUp } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
@@ -17,10 +17,14 @@ export default function SignUpScreen() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   //* Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded) return;
+    if (!isLoaded || loading) return;
+
+    setLoading(true);
+    setError('');
 
     // Start sign-up process using email and password provided
     try {
@@ -37,13 +41,17 @@ export default function SignUpScreen() {
       setPendingVerification(true);
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
+      setError(err.errors?.[0]?.message || 'An error occurred during sign up');
+    } finally {
+      setLoading(false);
     }
   };
 
   //* Handle submission of verification form
   const onVerifyPress = async () => {
-    if (!isLoaded) return;
-
+    if (!isLoaded || loading) return;
+    setLoading(true);
+    setError('');
     try {
       // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
@@ -59,9 +67,13 @@ export default function SignUpScreen() {
         // If the status is not complete, check why. User may need to
         // complete further steps.
         console.error(JSON.stringify(signUpAttempt, null, 2));
+        setError('Verification failed. Please try again.');
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
+      setError(err.errors?.[0]?.message || 'Invalid verification code');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,8 +103,16 @@ export default function SignUpScreen() {
           placeholderTextColor="#9A8478"
           onChangeText={code => setCode(code)}
         />
-        <TouchableOpacity onPress={onVerifyPress} style={styles.button}>
-          <Text style={styles.buttonText}>Verify</Text>
+        <TouchableOpacity
+          onPress={onVerifyPress}
+          style={[styles.button, loading && styles.buttonDisabled]}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Verify</Text>
+          )}
         </TouchableOpacity>
       </View>
     );
@@ -143,8 +163,16 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+        <TouchableOpacity
+          style={[styles.button, loading && styles.buttonDisabled]}
+          onPress={onSignUpPress}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Sign Up</Text>
+          )}
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>

@@ -37,9 +37,6 @@ export default function Page() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace('/');
       } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
-        console.error(JSON.stringify(signInAttempt, null, 2));
         setError('Sign in process not completed. Please try again.');
       }
     } catch (err) {

@@ -129,4 +129,8 @@ export const styles = StyleSheet.create({
     transform: [{ translateY: -12 }],
     padding: 4,
   },
+  buttonDisabled: {
+    backgroundColor: '#ccc', // or any disabled color you prefer
+    opacity: 0.7,
+  },
 });

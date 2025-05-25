@@ -1,6 +1,6 @@
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { styles } from '../../assets/styles/auth.styles';
@@ -14,11 +14,15 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // New state for password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   //* Handle the submission of the sign-in form
   const onSignInPress = async () => {
-    if (!isLoaded) return;
+    if (!isLoaded || loading) return; // Prevent multiple clicks
+
+    setLoading(true);
+    setError('');
 
     // Start the sign-in process using the email and password provided
     try {
@@ -36,13 +40,16 @@ export default function Page() {
         // If the status isn't complete, check why. User might need to
         // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
+        setError('Sign in process not completed. Please try again.');
       }
     } catch (err) {
       if (err.errors?.[0]?.code === 'form_password_incorrect') {
         setError('Password is incorrect. Please try again.');
       } else {
-        setError('An error occurred. Please try again.');
+        setError(err.errors?.[0]?.message || 'An error occurred. Please try again.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,8 +104,16 @@ export default function Page() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={onSignInPress}>
-          <Text style={styles.buttonText}>Sign In</Text>
+        <TouchableOpacity
+          style={[styles.button, loading && styles.buttonDisabled]}
+          onPress={onSignInPress}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Sign In</Text>
+          )}
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>

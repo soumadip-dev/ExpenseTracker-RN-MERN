@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   illustration: {
-    height: 370,
-    width: 400,
+    height: 300,
+    width: '100%',
     resizeMode: 'contain',
+    marginBottom: 20,
   },
   title: {
     fontSize: 32,
@@ -23,12 +24,13 @@ export const styles = StyleSheet.create({
   input: {
     backgroundColor: COLORS.white,
     borderRadius: 12,
-    padding: 15,
+    padding: 16,
     marginBottom: 16,
     borderWidth: 1,
     borderColor: COLORS.border,
     fontSize: 16,
     color: COLORS.text,
+    height: 52,
   },
   errorInput: {
     borderColor: COLORS.expense,
@@ -88,8 +90,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 2,
   },
-
-  // 🔴 Error styles
   errorBox: {
     backgroundColor: '#FFE5E5',
     padding: 12,
@@ -106,5 +106,27 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     flex: 1,
     fontSize: 14,
+  },
+  passwordContainer: {
+    position: 'relative',
+    marginBottom: 16,
+  },
+  passwordInput: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    fontSize: 16,
+    color: COLORS.text,
+    paddingRight: 50,
+    height: 52,
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 15,
+    top: '50%',
+    transform: [{ translateY: -12 }],
+    padding: 4,
   },
 });

@@ -14,6 +14,7 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // New state for password visibility
 
   //* Handle the submission of the sign-in form
   const onSignInPress = async () => {
@@ -43,6 +44,11 @@ export default function Page() {
         setError('An error occurred. Please try again.');
       }
     }
+  };
+
+  //* Toggle password visibility
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   //* Render the sign-in form
@@ -77,14 +83,19 @@ export default function Page() {
           onChangeText={emailAddress => setEmailAddress(emailAddress)}
         />
 
-        <TextInput
-          style={[styles.input, error && styles.errorInput]}
-          value={password}
-          placeholder="Enter password"
-          placeholderTextColor="#9A8478"
-          secureTextEntry={true}
-          onChangeText={password => setPassword(password)}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={[styles.passwordInput, error && styles.errorInput]}
+            value={password}
+            placeholder="Enter password"
+            placeholderTextColor="#9A8478"
+            secureTextEntry={!showPassword}
+            onChangeText={password => setPassword(password)}
+          />
+          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+            <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color={COLORS.textLight} />
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.button} onPress={onSignInPress}>
           <Text style={styles.buttonText}>Sign In</Text>

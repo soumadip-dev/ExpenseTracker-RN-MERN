@@ -24,4 +24,20 @@ export const useTransactions = userId => {
       console.error('Error fetching transactions', error);
     }
   }, [userId]);
+
+  //* Fetch account summary for a given user
+  const fetchSummary = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_URL}/transactions/summary/${userId}`);
+      const data = await response.json();
+      setSummary({
+        balance: data.data.totalBalance,
+        income: data.data.totalIncome,
+        expenses: data.data.totalExpenses,
+      });
+    } catch (error) {
+      console.error('Error fetching summary', error);
+    }
+  }, [userId]);
+  
 };

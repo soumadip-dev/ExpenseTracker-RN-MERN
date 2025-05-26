@@ -39,5 +39,16 @@ export const useTransactions = userId => {
       console.error('Error fetching summary', error);
     }
   }, [userId]);
-  
+
+  //* Load both transactions and summary data
+  const loadData = useCallback(async () => {
+    if (!userId) return;
+    setIsLoading(true);
+    try {
+      await Promise.all([fetchTrnsactions(), fetchSummary()]);
+    } catch (error) {
+      console.error('Error loading data', error);
+    }
+    setIsLoading(false);
+  }, [userId, fetchTrnsactions, fetchSummary]);
 };

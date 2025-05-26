@@ -51,4 +51,27 @@ export const useTransactions = userId => {
     }
     setIsLoading(false);
   }, [userId, fetchTrnsactions, fetchSummary]);
+
+  //* Delete a transaction by id
+  const deleteTransaction = async id => {
+    try {
+      const response = await fetch(`${API_URL}/transactions/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Error deleting transaction');
+      await loadData();
+      Alert.alert('Success', 'Transaction deleted successfully');
+    } catch (error) {
+      console.error('Error deleting transaction', error);
+      Alert.alert('Error', error.message);
+    }
+  };
+
+  return {
+    transaction,
+    summary,
+    isLoading,
+    loadData,
+    deleteTransaction,
+  };
 };

@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Alert } from 'react-native';
+import { API_URL } from '../constants/api.js';
 
-const API_URL = 'http://localhost:8080/api/v1';
-
+//* Custom hook to fetch transactions and account summary and delete a transaction
 export const useTransactions = userId => {
   const [transaction, setTransaction] = useState([]);
   const [summary, setSummary] = useState({

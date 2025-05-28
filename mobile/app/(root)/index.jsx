@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import { SignOutButton } from '@/components/SignOutButton';
 import { useTransactions } from '../../hooks/useTransactions.js';
 import { useEffect } from 'react';
+import PageLoader from '../../components/PageLoader.jsx';
 
 export default function Page() {
   const { user } = useUser();
@@ -14,6 +15,8 @@ export default function Page() {
   useEffect(() => {
     loadData();
   }, [user?.id, loadData]);
+
+  if (isLoading) return <PageLoader />;
 
   console.log('transaction', transaction);
   console.log('summary', summary);

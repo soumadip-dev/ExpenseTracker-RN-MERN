@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import PageLoader from '../../components/PageLoader.jsx';
 import { styles } from '../../assets/styles/home.styles.js';
 import { Ionicons } from '@expo/vector-icons';
+import BalanceCard from '../../components/BalanceCard.jsx';
 
 export default function Page() {
   const { user } = useUser();
@@ -48,8 +49,10 @@ export default function Page() {
               <Ionicons name="add" size={20} color="#FFF" />
               <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
+            <SignOutButton />
           </View>
         </View>
+        <BalanceCard summary={summary} />
       </View>
     </View>
   );

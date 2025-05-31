@@ -8,6 +8,8 @@ import PageLoader from '../../components/PageLoader.jsx';
 import { styles } from '../../assets/styles/home.styles.js';
 import { Ionicons } from '@expo/vector-icons';
 import BalanceCard from '../../components/BalanceCard.jsx';
+import { TransactionItem } from '../../components/TransactionItem.jsx';
+import NoTransactionsFound from '../../components/NoTransactionsFound.jsx';
 
 export default function Page() {
   const { user } = useUser();
@@ -58,6 +60,14 @@ export default function Page() {
           <Text style={styles.sectionTitle}>Recent Transactions</Text>
         </View>
       </View>
+      <FlatList
+        style={styles.transactionsList}
+        contentContainerStyle={styles.transactionsListContent}
+        data={transaction}
+        renderItem={({ item }) => <TransactionItem item={item} onDelete={deleteTransaction} />}
+        ListEmptyComponent={<NoTransactionsFound />}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }

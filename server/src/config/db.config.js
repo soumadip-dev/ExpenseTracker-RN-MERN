@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless';
-import { ENV } from './env.config';
+import { ENV } from './env.config.js';
 
-const sql = neon(ENV.DATABASE_URL);
+// Creates a SQL connection using our DB URL
+const sql = neon(ENV.DATABASE_URI);
 
 export default sql;

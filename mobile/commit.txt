@@ -2,8 +2,6 @@ git commit --date="2025-06-29T11:00:00" -m "feat: add navigation to login button
 
 git commit --date="2025-06-29T11:00:00" -m "feat: add navigation to login button using useNavigate"
 
-git commit --date="2025-06-29T11:00:00" -m "feat: add navigation to login button using useNavigate"
-
 git commit --date="2025-05-01T09:15:22" -m "feat: initialize project structure"
 
 git commit --date="2025-05-01T10:23:45" -m "docs: add README file"

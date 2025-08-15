@@ -10,21 +10,23 @@
   A cross-platform expense tracker app built with React Native (Expo) and Node.js. Track income & expenses, manage transactions, and monitor balance in real time.
 </h3>
 
+<p align="center"><strong>⚠️ Currently building…</strong></p>
+
 ---
 
-## 🌟 Features
+## ⭐ Features (Planned)
 
 - **User Authentication**: Signup and login using Clerk authentication.
 - **Email Verification**: Secure 6-digit verification code before accessing the app.
 - **5 Screens**: Signup, Login, Verify Email, Home, and Create Transaction.
-- **Expense Tracker**: Add income or expenses and manage financial entries.
-- **Live Balance Updates**: Current balance calculated dynamically.
-- **Delete Transactions**: Remove old entries with a single tap.
-- **Pull-to-Refresh**: Classic refresh gesture implemented from scratch.
+- **Expense Tracker**: Add income or expenses and manage financial entries. _(planned)_
+- **Live Balance Updates**: Current balance calculated dynamically. _(planned)_
+- **Delete Transactions**: Remove old entries with a single tap. _(planned)_
+- **Pull-to-Refresh**: Classic refresh gesture implemented from scratch. _(planned)_
 - **Logout**: Easily switch accounts or sign out.
-- **Rate Limiting**: Redis-based protection for API endpoints.
-- **Backend**: Express RESTful API connected to Neon-hosted Postgres.
-- **Cloud Deployment**: Fully hosted backend for mobile access.
+- **Rate Limiting**: Redis-based protection for API endpoints. _(planned)_
+- **Backend**: Express RESTful API connected to Neon-hosted Postgres. _(planned)_
+- **Cloud Deployment**: Fully hosted backend for mobile access. _(planned)_
 - **Beginner Friendly**: No prior React Native experience required.
 - **Free Tools**: 100% free stack for development and testing.
 
@@ -41,6 +43,7 @@
 
 ---
 
+<!--
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
@@ -58,7 +61,7 @@
    ```bash
    git clone https://github.com/soumadip-dev/ExpenseTracker-RN-PERN.git
    cd ExpenseTracker-RN-PERN
-   ```
+````
 
 2. **Backend Setup**
 
@@ -106,5 +109,4 @@
      cd ../client
      expo start
      ```
-
----
+-->

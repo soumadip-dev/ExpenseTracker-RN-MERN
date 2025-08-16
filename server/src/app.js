@@ -1,4 +1,5 @@
 import express from 'express';
+import transactionsRoute from './routes/transactions.routes.js';
 
 const app = express();
 
@@ -10,5 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('Hello from the Expense Tracker server');
 });
+
+//* Transcition route
+app.use('api/v1/transactions', transactionsRoute);
 
 export default app;

@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
   res.send('Hello from the Expense Tracker server');
 });
 
+//* Health route
+app.post('/api/v1/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 //* Transcition route
 app.use('/api/v1/transactions', transactionsRoute);
 

@@ -13,6 +13,6 @@ app.get('/', (req, res) => {
 });
 
 //* Transcition route
-app.use('api/v1/transactions', transactionsRoute);
+app.use('/api/v1/transactions', transactionsRoute);
 
 export default app;

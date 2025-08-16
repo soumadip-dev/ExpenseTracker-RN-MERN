@@ -5,13 +5,16 @@ import sql from './config/db.config.js';
 const app = express();
 const PORT = ENV.PORT || 8080;
 
+//* Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//* Home route
 app.get('/', (req, res) => {
   res.send('Hello from the Expense Tracker server');
 });
 
+//* Function to initialize the DB
 async function initDB() {
   try {
     await sql`

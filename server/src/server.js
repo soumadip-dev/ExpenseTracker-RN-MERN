@@ -22,6 +22,7 @@ async function initDB() {
     console.error('🔴 Database initialization failed', error);
   }
 }
+//// Note : DECIMAL(10, 2) => 10 digits, 2 decimal places, so the max value is 9999999999.99 (8 digits before the decimal, 2 digits after the decimal)
 
 //* Function to connect DB and start server
 const startServer = async () => {

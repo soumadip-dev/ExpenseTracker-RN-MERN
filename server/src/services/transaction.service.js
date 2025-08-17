@@ -16,12 +16,10 @@ const createTransactionService = async ({ user_id, title, amount, category }) =>
 
 //* Service to get all transactions created by userId
 const getTransactionsByUserIdService = async userId => {
-  const transactions = await sql`
-    SELECT *
-    FROM transactions
-    WHERE user_id = ${userId}
-    ORDER BY created_at DESC;
-  `;
+  // Get all transactions
+  const transactions = await Transaction.find({ user_id: userId }).sort({ createdAt: -1 });
+
+  // Return transactions
   return transactions;
 };
 

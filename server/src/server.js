@@ -1,9 +1,10 @@
 import app from './app.js';
 import { ENV } from './config/env.config.js';
-import sql from './config/db.config.js';
+import { initDB } from './config/db.config.js';
 
 const PORT = ENV.PORT || 8080;
 
+/*
 //* Function to initialize the DB
 async function initDB() {
   try {
@@ -23,6 +24,7 @@ async function initDB() {
   }
 }
 //// Note : DECIMAL(10, 2) => 10 digits, 2 decimal places, so the max value is 9999999999.99 (8 digits before the decimal, 2 digits after the decimal)
+*/
 
 //* Function to connect DB and start server
 const startServer = async () => {

@@ -1,9 +1,11 @@
 import express from 'express';
 import transactionsRoute from './routes/transactions.routes.js';
+import rateLimiter from './middleware/rateLimiter.middleware.js';
 
 const app = express();
 
 //* Middlewares
+app.use(rateLimiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,4 +1,4 @@
-<h1 align="center">Expense Tracker App (RN-PERN)</h1>
+<h1 align="center">Expense Tracker App (RN-MERN)</h1>
 
 <div align="center">
   <a href="https://github.com/soumadip-dev">
@@ -10,11 +10,11 @@
   A cross-platform expense tracker app built with React Native (Expo) and Node.js. Track income & expenses, manage transactions, and monitor balance in real time.
 </h3>
 
-<p align="center"><strong>⚠️ Currently building…</strong></p>
+<p align="center"><strong>🚀 Server implementation complete - Mobile app coming soon!</strong></p>
 
 ---
 
-## ⭐ Features (Planned)
+## ⭐ Features
 
 - **User Authentication**: Signup and login using Clerk authentication.
 - **Email Verification**: Secure 6-digit verification code before accessing the app.
@@ -36,7 +36,7 @@
 
 - **Frontend**: React Native, Expo, TypeScript, Tailwind CSS
 - **Backend**: Node.js with Express – RESTful API
-- **Database**: PostgreSQL hosted on Neon
+- **Database**: MongoDB with Mongoose
 - **Caching & Rate Limiting**: Redis
 - **Authentication**: Clerk
 - **Cloud Deployment**: Backend hosted online, accessible by mobile

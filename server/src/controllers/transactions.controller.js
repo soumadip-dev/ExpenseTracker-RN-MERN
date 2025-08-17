@@ -90,4 +90,76 @@ const deleteTransaction = async (req, res) => {
   }
 };
 
+//* Controller to get summary
+const getSummaryByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Check if userId is present
+    if (!userId) {
+      return res.status(400).json({ message: 'userId is missing', success: false });
+    }
+
+    // Get total balance for userId
+    const totalBalance = await Transaction.aggregate([
+      {
+        $match: { user_id: userId },
+      },
+      {
+        $group: {
+          _id: null,
+          balance: { $sum: '$amount' },
+        },
+      },
+    ]);
+
+    // Get total income for userId
+    const totalIncome = await Transaction.aggregate([
+      {
+        $match: {
+          user_id: userId,
+          amount: { $gt: 0 },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          income: { $sum: '$amount' },
+        },
+      },
+    ]);
+
+    // Get total expenses for userId
+    const totalExpenses = await Transaction.aggregate([
+      {
+        $match: {
+          user_id: userId,
+          amount: { $lt: 0 },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          expenses: { $sum: '$amount' },
+        },
+      },
+    ]);
+
+    // Send response (success)
+    res.status(200).json({
+      message: 'Summary fetched successfully',
+      data: {
+        totalBalance: totalBalance[0]?.balance || 0,
+        totalIncome: totalIncome[0]?.income || 0,
+        totalExpenses: totalExpenses[0]?.expenses || 0,
+      },
+      success: true,
+    });
+  } catch (error) {
+    console.error('Error getting summary', error.message);
+    // Send response (error)
+    res.status(500).json({ message: 'Internal server error', success: false });
+  }
+};
+
 export { createTransaction, getTransactionsByUserId, deleteTransaction };

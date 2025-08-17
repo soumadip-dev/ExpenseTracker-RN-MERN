@@ -1,14 +1,17 @@
-import sql from '../config/db.config.js';
+// import sql from '../config/db.config.js';
+import Transaction from '../model/transactions.model.js';
 
 //* Service to create a transaction
 const createTransactionService = async ({ user_id, title, amount, category }) => {
   // Insert transaction into DB
-  const transaction = await sql`
-    INSERT INTO transactions (user_id, title, amount, category)
-    VALUES (${user_id}, ${title}, ${amount}, ${category})
-    RETURNING *`; // added RETURNING * to get inserted row
+  const transaction = await Transaction.create({
+    user_id,
+    title,
+    amount,
+    category,
+  });
 
-  return transaction[0];
+  return transaction; // returns the created document
 };
 
 //* Service to get all transactions created by userId

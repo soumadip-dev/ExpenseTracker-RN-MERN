@@ -3,6 +3,7 @@ import Transaction from '../model/transactions.model.js';
 import {
   createTransactionService,
   getTransactionsByUserIdService,
+  deleteTransactionService,
 } from '../services/transaction.service.js';
 
 //* Controller to create a transaction
@@ -68,11 +69,11 @@ const deleteTransaction = async (req, res) => {
       return res.status(400).json({ message: 'Invalid transactionId', success: false });
     }
 
-    // Delete transaction
-    const result = await Transaction.findByIdAndDelete(transactionId);
+    // Call service
+    const deletedTransaction = await deleteTransactionService(transactionId);
 
     // Check if transaction is deleted
-    if (!result) {
+    if (!deletedTransaction) {
       return res.status(404).json({ message: 'Transaction not found', success: false });
     }
 
@@ -83,7 +84,7 @@ const deleteTransaction = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.error('Error getting transactions', error);
+    console.error('Error getting transactions', error.message);
     // Send response (error)
     res.status(500).json({ message: 'Internal server error', success: false });
   }

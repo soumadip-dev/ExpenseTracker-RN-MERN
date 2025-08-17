@@ -23,4 +23,12 @@ const getTransactionsByUserIdService = async userId => {
   return transactions;
 };
 
-export { createTransactionService, getTransactionsByUserIdService };
+//* Service to delete a transaction by transactionId
+const deleteTransactionService = async transactionId => {
+  // Delete transaction from DB
+  const deletedTransaction = await Transaction.findByIdAndDelete(transactionId);
+
+  // Return deleted transaction
+  return deletedTransaction;
+};
+export { createTransactionService, getTransactionsByUserIdService, deleteTransactionService };

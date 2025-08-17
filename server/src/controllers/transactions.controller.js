@@ -100,47 +100,40 @@ const getSummaryByUserId = async (req, res) => {
       return res.status(400).json({ message: 'userId is missing', success: false });
     }
 
-    // Get total balance for userId
-    const totalBalance = await Transaction.aggregate([
-      {
-        $match: { user_id: userId },
-      },
-      {
-        $group: {
-          _id: null,
-          balance: { $sum: '$amount' },
-        },
-      },
-    ]);
+    // Aggregate transactions to get summary
+    const summary = await Transaction.aggregate([
+      // Filter by user
+      { $match: { user_id: userId } },
 
-    // Get total income for userId
-    const totalIncome = await Transaction.aggregate([
-      {
-        $match: {
-          user_id: userId,
-          amount: { $gt: 0 },
-        },
-      },
+      // Group all matching docs together and calculate fields
       {
         $group: {
-          _id: null,
-          income: { $sum: '$amount' },
-        },
-      },
-    ]);
+          _id: null, // Group all documents together into one result
 
-    // Get total expenses for userId
-    const totalExpenses = await Transaction.aggregate([
-      {
-        $match: {
-          user_id: userId,
-          amount: { $lt: 0 },
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          expenses: { $sum: '$amount' },
+          // total balance = just sum of all amounts
+          totalBalance: { $sum: '$amount' },
+
+          // total income = sum only positive numbers
+          totalIncome: {
+            $sum: {
+              $cond: [
+                { $gt: ['$amount', 0] }, // IF amount > 0
+                '$amount', // THEN add the amount
+                0, // ELSE add 0
+              ],
+            },
+          },
+
+          // total expenses = sum only negative numbers
+          totalExpenses: {
+            $sum: {
+              $cond: [
+                { $lt: ['$amount', 0] }, // IF amount < 0
+                { $abs: '$amount' }, // THEN add the absolute value
+                0, // ELSE add 0
+              ],
+            },
+          },
         },
       },
     ]);
@@ -149,9 +142,9 @@ const getSummaryByUserId = async (req, res) => {
     res.status(200).json({
       message: 'Summary fetched successfully',
       data: {
-        totalBalance: totalBalance[0]?.balance || 0,
-        totalIncome: totalIncome[0]?.income || 0,
-        totalExpenses: totalExpenses[0]?.expenses || 0,
+        totalBalance: summary[0]?.totalBalance || 0,
+        totalIncome: summary[0]?.totalIncome || 0,
+        totalExpenses: summary[0]?.totalExpenses || 0,
       },
       success: true,
     });
@@ -162,4 +155,4 @@ const getSummaryByUserId = async (req, res) => {
   }
 };
 
-export { createTransaction, getTransactionsByUserId, deleteTransaction };
+export { createTransaction, getTransactionsByUserId, deleteTransaction, getSummaryByUserId };

@@ -1,6 +1,6 @@
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { styles } from '../../assets/styles/auth.styles';
@@ -51,6 +51,7 @@ export default function Page() {
       extraScrollHeight={30}
     >
       <View style={styles.container}>
+        <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
         <Text style={styles.title}>Welcome Back</Text>
 
         {error ? (
@@ -80,6 +81,7 @@ export default function Page() {
           secureTextEntry={true}
           onChangeText={password => setPassword(password)}
         />
+
         <TouchableOpacity style={styles.button} onPress={onSignInPress}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>

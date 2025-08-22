@@ -130,7 +130,7 @@ export const styles = StyleSheet.create({
     padding: 4,
   },
   buttonDisabled: {
-    backgroundColor: '#ccc', // or any disabled color you prefer
+    backgroundColor: '#ccc',
     opacity: 0.7,
   },
 });

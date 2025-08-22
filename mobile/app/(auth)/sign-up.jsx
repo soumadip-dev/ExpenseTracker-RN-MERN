@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { styles } from '@/assets/styles/auth.styles.js';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/colors';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -93,10 +94,16 @@ export default function SignUpScreen() {
 
   //* Sign-up form
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <KeyboardAwareScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      enableAutomaticScroll={true}
+    >
       <View style={styles.container}>
         <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
         <Text style={styles.title}>Create Account</Text>
+
         {error ? (
           <View style={styles.errorBox}>
             <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
@@ -106,6 +113,7 @@ export default function SignUpScreen() {
             </TouchableOpacity>
           </View>
         ) : null}
+
         <TextInput
           style={[styles.input, error && styles.errorInput]}
           autoCapitalize="none"
@@ -123,9 +131,11 @@ export default function SignUpScreen() {
           secureTextEntry={true}
           onChangeText={password => setPassword(password)}
         />
+
         <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
-          <Text style={styles.buttonText}>Continue</Text>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
+
         <View style={styles.footerContainer}>
           <Text style={styles.footerText}>Already have an account?</Text>
           <TouchableOpacity onPress={() => router.back()}>
@@ -133,6 +143,6 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

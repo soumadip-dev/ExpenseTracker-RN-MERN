@@ -14,9 +14,9 @@
 
 <div align="center">
 
-| Authentication Pages                                                                   | Transaction Pages                                                                                      |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| <img src="./mobile/assets/images/SS_Auth_pages.jpg" alt="Auth Screenshot" width="400"> | <img src="./mobile/assets/images/SS_Transactions_pages.jpg" alt="Transactions Screenshot" width="400"> |
+| Authentication Pages                                                                                | Transaction Pages                                                                                                   |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| <img src="./mobile/assets/images/SS_Auth_pages.jpg" alt="Auth Screenshot" width="400" height="800"> | <img src="./mobile/assets/images/SS_Transactions_pages.jpg" alt="Transactions Screenshot" width="400" height="800"> |
 
 </div>
 

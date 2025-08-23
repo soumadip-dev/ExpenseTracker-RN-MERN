@@ -80,7 +80,7 @@ const deleteTransaction = async (req, res) => {
     // Send response (success)
     res.status(200).json({
       message: 'Transaction deleted successfully',
-      data: result,
+      data: deletedTransaction,
       success: true,
     });
   } catch (error) {

@@ -1,6 +1,6 @@
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
-import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { styles } from '../../assets/styles/auth.styles';
@@ -14,15 +14,10 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
 
-  //* Handle the submission of the sign-in form
+  // Handle the submission of the sign-in form
   const onSignInPress = async () => {
-    if (!isLoaded || loading) return; // Prevent multiple clicks
-
-    setLoading(true);
-    setError('');
+    if (!isLoaded) return;
 
     // Start the sign-in process using the email and password provided
     try {
@@ -37,25 +32,19 @@ export default function Page() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace('/');
       } else {
-        setError('Sign in process not completed. Please try again.');
+        // If the status isn't complete, check why. User might need to
+        // complete further steps.
+        console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
       if (err.errors?.[0]?.code === 'form_password_incorrect') {
         setError('Password is incorrect. Please try again.');
       } else {
-        setError(err.errors?.[0]?.message || 'An error occurred. Please try again.');
+        setError('An error occurred. Please try again.');
       }
-    } finally {
-      setLoading(false);
     }
   };
 
-  //* Toggle password visibility
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  //* Render the sign-in form
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -87,30 +76,17 @@ export default function Page() {
           onChangeText={emailAddress => setEmailAddress(emailAddress)}
         />
 
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={[styles.passwordInput, error && styles.errorInput]}
-            value={password}
-            placeholder="Enter password"
-            placeholderTextColor="#9A8478"
-            secureTextEntry={!showPassword}
-            onChangeText={password => setPassword(password)}
-          />
-          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
-            <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color={COLORS.textLight} />
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          style={[styles.input, error && styles.errorInput]}
+          value={password}
+          placeholder="Enter password"
+          placeholderTextColor="#9A8478"
+          secureTextEntry={true}
+          onChangeText={password => setPassword(password)}
+        />
 
-        <TouchableOpacity
-          style={[styles.button, loading && styles.buttonDisabled]}
-          onPress={onSignInPress}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.buttonText}>Sign In</Text>
-          )}
+        <TouchableOpacity style={styles.button} onPress={onSignInPress}>
+          <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>

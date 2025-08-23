@@ -1,6 +1,6 @@
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
-import { Link } from 'expo-router';
-import { Alert, FlatList, Image, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
+import { useUser } from '@clerk/clerk-expo';
+import { router } from 'expo-router';
+import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SignOutButton } from '@/components/SignOutButton';
 import { useTransactions } from '../../hooks/useTransactions.js';
 import { useEffect } from 'react';

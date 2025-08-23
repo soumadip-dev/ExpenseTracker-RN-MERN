@@ -1,30 +1,26 @@
-import { Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
-import { Image } from 'expo-image';
+import { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSignUp } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { styles } from '@/assets/styles/auth.styles.js';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/colors';
+import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
+
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
 
-  //* Handle submission of sign-up form
+  // Handle submission of sign-up form
   const onSignUpPress = async () => {
-    if (!isLoaded || loading) return;
-
-    setLoading(true);
-    setError('');
+    if (!isLoaded) return;
 
     // Start sign-up process using email and password provided
     try {
@@ -45,16 +41,14 @@ export default function SignUpScreen() {
       } else {
         setError('An error occurred. Please try again.');
       }
-    } finally {
-      setLoading(false);
+      console.log(err);
     }
   };
 
-  //* Handle submission of verification form
+  // Handle submission of verification form
   const onVerifyPress = async () => {
-    if (!isLoaded || loading) return;
-    setLoading(true);
-    setError('');
+    if (!isLoaded) return;
+
     try {
       // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
@@ -67,25 +61,22 @@ export default function SignUpScreen() {
         await setActive({ session: signUpAttempt.createdSessionId });
         router.replace('/');
       } else {
-        setError('Verification failed. Please try again.');
+        // If the status is not complete, check why. User may need to
+        // complete further steps.
+        console.error(JSON.stringify(signUpAttempt, null, 2));
       }
     } catch (err) {
-      setError(err.errors?.[0]?.message || 'Invalid verification code');
-    } finally {
-      setLoading(false);
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      console.error(JSON.stringify(err, null, 2));
     }
   };
 
-  //* Toggle password visibility
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  //* Verification form
   if (pendingVerification) {
     return (
       <View style={styles.verificationContainer}>
         <Text style={styles.verificationTitle}>Verify your email</Text>
+
         {error ? (
           <View style={styles.errorBox}>
             <Ionicons name="alert-circle" size={20} color={COLORS.expense} />
@@ -95,6 +86,7 @@ export default function SignUpScreen() {
             </TouchableOpacity>
           </View>
         ) : null}
+
         <TextInput
           style={[styles.verificationInput, error && styles.errorInput]}
           value={code}
@@ -102,22 +94,14 @@ export default function SignUpScreen() {
           placeholderTextColor="#9A8478"
           onChangeText={code => setCode(code)}
         />
-        <TouchableOpacity
-          onPress={onVerifyPress}
-          style={[styles.button, loading && styles.buttonDisabled]}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.buttonText}>Verify</Text>
-          )}
+
+        <TouchableOpacity onPress={onVerifyPress} style={styles.button}>
+          <Text style={styles.buttonText}>Verify</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
-  //* Sign-up form
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -127,6 +111,7 @@ export default function SignUpScreen() {
     >
       <View style={styles.container}>
         <Image source={require('../../assets/images/revenue.png')} style={styles.illustration} />
+
         <Text style={styles.title}>Create Account</Text>
 
         {error ? (
@@ -148,30 +133,17 @@ export default function SignUpScreen() {
           onChangeText={email => setEmailAddress(email)}
         />
 
-        <View style={styles.passwordContainer}>
-          <TextInput
-            style={[styles.passwordInput, error && styles.errorInput]}
-            value={password}
-            placeholder="Enter password"
-            placeholderTextColor="#9A8478"
-            secureTextEntry={!showPassword}
-            onChangeText={password => setPassword(password)}
-          />
-          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
-            <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color={COLORS.textLight} />
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          style={[styles.input, error && styles.errorInput]}
+          value={password}
+          placeholder="Enter password"
+          placeholderTextColor="#9A8478"
+          secureTextEntry={true}
+          onChangeText={password => setPassword(password)}
+        />
 
-        <TouchableOpacity
-          style={[styles.button, loading && styles.buttonDisabled]}
-          onPress={onSignUpPress}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.buttonText}>Sign Up</Text>
-          )}
+        <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>

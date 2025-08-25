@@ -5,7 +5,7 @@
 </h1>
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=react,typescript,tailwindcss,nodejs,express,mongodb,redis,github" alt="Tech Stack" width="360">
+  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,redis,github" alt="Tech Stack" width="260">
 </div>
 
 <p align="center">
@@ -32,18 +32,16 @@
 - 👋 **Logout**: Easily switch accounts or sign out
 - 🛡️ **Rate Limiting**: Redis-based protection for API endpoints
 - 🚀 **Backend**: Express RESTful API connected to MongoDB
-- ☁️ **Cloud Deployment**: Fully hosted backend for mobile access
-- 🎯 **Beginner Friendly**: No prior React Native experience required
-- 💯 **Free Tools**: 100% free stack for development and testing
+
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React Native, Expo, TypeScript, Tailwind CSS
+- **Frontend**: React Native, Expo
 - **Backend**: Node.js with Express – RESTful API
 - **Database**: MongoDB with Mongoose
 - **Caching & Rate Limiting**: Redis
 - **Authentication**: Clerk
-- **Cloud Deployment**: Backend hosted online, accessible by mobile
+
 
 ## ⚙️ Installation & Setup
 
